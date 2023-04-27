@@ -7,11 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.grigoriev.cloudstorage.exception.NotFoundException;
-import ru.grigoriev.cloudstorage.model.User;
-import ru.grigoriev.cloudstorage.repository.UserRepository;
 import ru.grigoriev.cloudstorage.jwt_token.jwt.JwtUser;
 import ru.grigoriev.cloudstorage.jwt_token.jwt.JwtUserFactory;
-
+import ru.grigoriev.cloudstorage.model.User;
+import ru.grigoriev.cloudstorage.repository.UserRepository;
 
 import java.util.Optional;
 
@@ -30,7 +29,7 @@ public class JwtUserDetailsService implements UserDetailsService {
                         new NotFoundException("User does not exist in the database")));
 
         JwtUser jwtUser = JwtUserFactory.create(user.get());
-        log.info("IN loadUserByUsername - user with username: {} successfully loaded", email);
+        log.info("IN loadUserByUsername - user with email: {} successfully loaded", email);
         return jwtUser;
     }
 }

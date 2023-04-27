@@ -17,6 +17,11 @@ spring:
     username: postgres
     password: postgres
 
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:db/initDB.sql,classpath:db/populateDB.sql
+
 server:
   port: 8090
 

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.grigoriev.cloudstorage.exception.NotFoundException;
 import ru.grigoriev.cloudstorage.web.response.BaseWebResponse;
 
-
 import javax.validation.ConstraintViolationException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;

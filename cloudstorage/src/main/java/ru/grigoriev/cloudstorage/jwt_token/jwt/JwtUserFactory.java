@@ -4,7 +4,6 @@ import ru.grigoriev.cloudstorage.model.Status;
 import ru.grigoriev.cloudstorage.model.User;
 
 public final class JwtUserFactory {
-
     public JwtUserFactory() {
     }
 
@@ -16,5 +15,4 @@ public final class JwtUserFactory {
                 user.getStatus().equals(Status.ACTIVE)
         );
     }
-
 }

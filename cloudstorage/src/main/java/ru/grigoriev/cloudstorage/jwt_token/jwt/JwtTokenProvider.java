@@ -10,11 +10,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
 public class JwtTokenProvider {
@@ -26,6 +27,7 @@ public class JwtTokenProvider {
     private long validityInMilliseconds;
 
     private final UserDetailsService userDetailsService;
+    private final Set<String> storeToken = new CopyOnWriteArraySet<>();
 
     public JwtTokenProvider(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -41,11 +43,10 @@ public class JwtTokenProvider {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
     }
 
-    public String createToken(String username) {
-        Claims claims = Jwts.claims().setSubject(username);
+    public String createToken(String email) {
+        Claims claims = Jwts.claims().setSubject(email);
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
-
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
@@ -64,27 +65,33 @@ public class JwtTokenProvider {
     }
 
     public String resolveToken(HttpServletRequest req) {
-        String bearerToken = req.getHeader("Authorization");
-
-        if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
-            return bearerToken.substring(7, bearerToken.length());
+        String bearerToken = req.getHeader("auth-token");
+        if (bearerToken != null) {
+            bearerToken = bearerToken.replace("Bearer ", "");
+        } else {
+            return null;
         }
-        return null;
+        return storeToken.contains(bearerToken) ? bearerToken : null;
     }
 
     public boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-
             if (claims.getBody().getExpiration().before(new Date())) {
                 return false;
             }
-
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            System.out.println(e.getMessage());
             throw new JwtAuthenticationException("JWT token is expired or invalid");
         }
+    }
+
+    public void writeToken(String token) {
+        storeToken.add(token);
+    }
+
+    public void deleteToken(String token) {
+        storeToken.remove(token);
     }
 }
 

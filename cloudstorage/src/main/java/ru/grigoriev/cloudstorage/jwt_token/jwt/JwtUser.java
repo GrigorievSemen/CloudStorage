@@ -13,9 +13,9 @@ public class JwtUser implements UserDetails {
     private final String password;
     private final boolean enabled;
 
-    public JwtUser(int id,  String password,
+    public JwtUser(int id, String password,
                    String email, boolean enabled
-                   ) {
+    ) {
         this.id = id;
         this.password = password;
         this.email = email;
