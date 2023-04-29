@@ -27,6 +27,7 @@ public class Auth {
 
     @GetMapping("/login")
     public ResponseEntity<?> logoutUser(@RequestHeader("auth-token") String token) {
+        log.info("IN logout");
         authService.logoutUser(token);
         return ResponseEntity.ok(HttpStatus.OK);
     }

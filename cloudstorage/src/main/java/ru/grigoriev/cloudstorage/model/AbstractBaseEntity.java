@@ -14,13 +14,7 @@ import javax.persistence.*;
 @Data
 @SuperBuilder
 public abstract class AbstractBaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
-
-//    public boolean isNew() {
-//        return this.id == null;
-//    }
-
 }
