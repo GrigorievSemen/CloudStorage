@@ -17,11 +17,10 @@ spring:
     username: postgres
     password: postgres
 
-    #for develop
-#  sql:
-#    init:
-#      mode: always
-#      data-locations: classpath:db/initDB.sql,classpath:db/populateDB.sql
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:db/initDB.sql,classpath:db/populateDB.sql
 
 server:
   port: 8090

@@ -1,0 +1,40 @@
+version: '3.1'
+services:
+  app:
+    container_name: springboot-postgresql
+    image: springboot-app
+    build:
+      context: ./
+      dockerfile: Dockerfile.file
+    ports:
+      - "8090:8090"
+    depends_on:
+      - postgresqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresqldb:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+
+  postgresqldb:
+    image: postgres
+    build:
+      context: ./
+      dockerfile: Dockerfile.postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+
+
+
+
+
+
+
+
+
+
+
+

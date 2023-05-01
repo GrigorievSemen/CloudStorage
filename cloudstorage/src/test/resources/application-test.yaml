@@ -7,14 +7,14 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL82Dialect
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/cloud_storage
+    url: jdbc:postgresql://localhost:5431/cloud_storage
     username: postgres
     password: postgres
 
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:db/initDB.sql,classpath:db/populateDB.sql
+#  sql:
+#    init:
+#      mode: always
+#      data-locations: classpath:db/initDB.sql,classpath:db/populateDB.sql
 
 server:
   port: 8090
