@@ -1,5 +1,6 @@
 package ru.grigoriev.cloudstorage.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,15 +10,10 @@ import ru.grigoriev.cloudstorage.jwt_token.jwt.JwtTokenProvider;
 import ru.grigoriev.cloudstorage.web.request.AuthenticationRequest;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
-
-
-    public AuthService(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
-        this.authenticationManager = authenticationManager;
-        this.jwtTokenProvider = jwtTokenProvider;
-    }
 
     public String login(AuthenticationRequest request) {
         String email = request.getLogin();

@@ -27,7 +27,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         Optional<User> user = Optional.ofNullable(repository.findByEmail(email)
                 .orElseThrow(() ->
                         new NotFoundException("User does not exist in the database")));
-
+        System.out.println(user);
         JwtUser jwtUser = JwtUserFactory.create(user.get());
         log.info("IN loadUserByUsername - user with email: {} successfully loaded", email);
         return jwtUser;

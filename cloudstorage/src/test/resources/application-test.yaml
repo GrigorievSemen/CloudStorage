@@ -1,11 +1,5 @@
 spring:
-  servlet:
-    multipart:
-      max-file-size: 157286400
-      max-request-size: 157286400
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+
   jpa:
     hibernate:
       ddl-auto: none
@@ -17,11 +11,10 @@ spring:
     username: postgres
     password: postgres
 
-    #for develop
-#  sql:
-#    init:
-#      mode: always
-#      data-locations: classpath:db/initDB.sql,classpath:db/populateDB.sql
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:db/initDB.sql,classpath:db/populateDB.sql
 
 server:
   port: 8090

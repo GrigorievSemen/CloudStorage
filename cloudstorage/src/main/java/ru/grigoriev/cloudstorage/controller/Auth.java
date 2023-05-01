@@ -1,6 +1,5 @@
 package ru.grigoriev.cloudstorage.controller;
 
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,6 @@ import ru.grigoriev.cloudstorage.web.response.AuthResponse;
 @RequiredArgsConstructor
 
 public class Auth {
-
     private final AuthService authService;
 
     @PostMapping("/login")

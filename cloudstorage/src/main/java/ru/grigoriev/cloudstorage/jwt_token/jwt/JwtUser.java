@@ -22,11 +22,6 @@ public class JwtUser implements UserDetails {
         this.enabled = enabled;
     }
 
-    @JsonIgnore
-    public int getId() {
-        return id;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -64,9 +59,5 @@ public class JwtUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
-    }
-
-    public String getEmail() {
-        return email;
     }
 }
